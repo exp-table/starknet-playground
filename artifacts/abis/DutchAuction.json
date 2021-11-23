@@ -1,0 +1,129 @@
+[
+    {
+        "members": [
+            {
+                "name": "starting_price",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "decreasing_constant",
+                "offset": 1,
+                "type": "felt"
+            },
+            {
+                "name": "starting_time",
+                "offset": 2,
+                "type": "felt"
+            },
+            {
+                "name": "duration",
+                "offset": 3,
+                "type": "felt"
+            }
+        ],
+        "name": "Auction",
+        "size": 4,
+        "type": "struct"
+    },
+    {
+        "inputs": [
+            {
+                "name": "auction_id",
+                "type": "felt"
+            },
+            {
+                "name": "starting_price",
+                "type": "felt"
+            },
+            {
+                "name": "decreasing_constant",
+                "type": "felt"
+            },
+            {
+                "name": "starting_time",
+                "type": "felt"
+            },
+            {
+                "name": "duration",
+                "type": "felt"
+            }
+        ],
+        "name": "setAuction",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "auction_id",
+                "type": "felt"
+            }
+        ],
+        "name": "getAuction",
+        "outputs": [
+            {
+                "name": "auction",
+                "type": "Auction"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "auction_id",
+                "type": "felt"
+            }
+        ],
+        "name": "getPrice",
+        "outputs": [
+            {
+                "name": "price",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "auction_id",
+                "type": "felt"
+            }
+        ],
+        "name": "verifyBid",
+        "outputs": [
+            {
+                "name": "price",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "get_block_timestamp",
+        "outputs": [
+            {
+                "name": "block_timestamp",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "new_block_timestamp",
+                "type": "felt"
+            }
+        ],
+        "name": "set_block_timestamp",
+        "outputs": [],
+        "type": "function"
+    }
+]
