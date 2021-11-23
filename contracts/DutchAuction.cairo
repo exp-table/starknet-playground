@@ -5,10 +5,18 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.alloc import alloc
-from starkware.cairo.common.math_cmp import is_le
+from starkware.cairo.common.math_cmp import is_le, is_le_felt
 from starkware.cairo.common.math import assert_not_zero
 
-from cmp import is_ge
+# WARNING ! Naive implementation of >= ! shouldn't be used for production
+func is_ge{range_check_ptr}(a:felt, b:felt) -> (res : felt):
+    let (le) = is_le_felt(a+1, b)
+    if le == 1:
+        return (res=0)
+    else:
+        return (res=1)
+    end
+end
 
 struct Auction:
     member starting_price : felt
@@ -87,7 +95,6 @@ func verifyBid{
     # refund the difference
     # if (msg.value - pricePaid > 0) Address.sendValue(payable(msg.sender), msg.value-pricePaid);
     return (price)
-
 end
 
 # TMP HACK
