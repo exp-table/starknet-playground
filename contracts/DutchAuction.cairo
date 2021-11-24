@@ -8,15 +8,7 @@ from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.math_cmp import is_le, is_le_felt
 from starkware.cairo.common.math import assert_not_zero
 
-# WARNING ! Naive implementation of >= ! shouldn't be used for production
-func is_ge{range_check_ptr}(a:felt, b:felt) -> (res : felt):
-    let (le) = is_le_felt(a+1, b)
-    if le == 1:
-        return (res=0)
-    else:
-        return (res=1)
-    end
-end
+from cmp import is_ge, assert_is_ge
 
 struct Auction:
     member starting_price : felt
@@ -84,11 +76,7 @@ func verifyBid{
     let (auction:Auction) = _auctions.read(auction_id)
     let (now) = get_block_timestamp()
     assert_not_zero(auction.starting_time) #check auction exists
-    let (flag) = is_ge(now, auction.starting_time) #check auction has started
-    #abort if didn't start yet
-    if flag == 0:
-        assert 0 = 1
-    end
+    assert_is_ge(now, auction.starting_time) #check auction has started
     let (price) = getPrice(auction_id)
     # do some checks w.r.t. the price
     # require(msg.value >= pricePaid, "PURCHASE:INCORRECT MSG.VALUE");

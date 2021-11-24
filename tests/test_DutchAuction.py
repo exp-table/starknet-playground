@@ -10,7 +10,8 @@ def event_loop():
 async def dutch_factory():
     starknet = await Starknet.empty()
     dutch = await starknet.deploy(
-        "contracts/DutchAuction.cairo"
+        "contracts/DutchAuction.cairo",
+        cairo_path=["contracts"]
     )
     return starknet, dutch
 
